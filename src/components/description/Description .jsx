@@ -1,4 +1,4 @@
-export default function Decription() {
+export default function Description() {
   return (
     <>
       <h2>Sip Happens Café</h2>

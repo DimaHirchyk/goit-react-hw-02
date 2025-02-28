@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import Decription from "./description/Deccription";
+import Description from "./description/Description ";
 import Feedback from "./feedback/Feedback";
 import Options from "./options/Options";
+import Notification from "./notification/Notification";
 
 export default function App() {
   const [feedback, setFeedback] = useState(() => {
@@ -12,33 +13,41 @@ export default function App() {
     }
     return {
       good: 0,
-      neutal: 0,
+      neutral: 0,
       bad: 0,
     };
   });
+
+  const resetFeedback = () => {
+    setFeedback({ good: 0, neutral: 0, bad: 0 });
+  };
 
   useEffect(() => {
     window.localStorage.setItem("feedback", JSON.stringify(feedback));
   }, [feedback]);
 
   const updateFeedback = (feedbackType) => {
-    if (feedbackType === 0) {
-      setFeedback({ good: 0, neutal: 0, bad: 0 });
-    } else {
-      setFeedback((prev) => ({
-        ...prev,
-        [feedbackType]: prev[feedbackType] + 1,
-      }));
-    }
+    setFeedback((prev) => ({
+      ...prev,
+      [feedbackType]: prev[feedbackType] + 1,
+    }));
   };
 
-  const totalFeedback = feedback.good + feedback.neutal + feedback.bad;
+  const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
 
   return (
     <>
-      <Decription />
-      <Options total={totalFeedback} data={updateFeedback} />
-      <Feedback total={totalFeedback} meaning={feedback} />
+      <Description />
+      <Options
+        total={totalFeedback}
+        data={updateFeedback}
+        reset={resetFeedback}
+      />
+      {totalFeedback === 0 ? (
+        <Notification />
+      ) : (
+        <Feedback total={totalFeedback} meaning={feedback} />
+      )}
     </>
   );
 }

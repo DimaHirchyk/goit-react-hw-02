@@ -3,17 +3,11 @@ export default function Feedback({ meaning, total }) {
 
   return (
     <>
-      {total === 0 ? (
-        <p>Not Feedbak yet</p>
-      ) : (
-        <>
-          <p>Good: {meaning.good} </p>
-          <p>Neutral: {meaning.neutal}</p>
-          <p>Bad: {meaning.bad}</p>
-          <p>Total: {total}</p>
-          <p>Positive: {persent}%</p>
-        </>
-      )}
+      <p>Good: {meaning.good} </p>
+      <p>Neutral: {meaning.neutral}</p>
+      <p>Bad: {meaning.bad}</p>
+      <p>Total: {total}</p>
+      <p>Positive: {persent}%</p>
     </>
   );
 }
