@@ -1,6 +1,4 @@
-export default function Feedback({ meaning, total }) {
-  const persent = Number(Math.round((meaning.good / total) * 100));
-
+export default function Feedback({ meaning, total, persent }) {
   return (
     <>
       <p>Good: {meaning.good} </p>
